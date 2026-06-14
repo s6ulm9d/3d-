@@ -99,9 +99,21 @@ export default function App() {
       if (stageNameNode) stageNameNode.innerText = stages[currentStageIndex].title;
     };
 
+    let velocity = 0;
+    const stiffness = 0.06; // spring stiffness
+    const damping = 0.75;    // spring damping (higher = smoother, less oscillation)
+
     const animLoop = () => {
-      // Tighter lerp for high-FPS responsiveness
-      smoothProgress.current = THREE.MathUtils.lerp(smoothProgress.current, scrollRef.current, 0.075);
+      // Spring physics simulation for organic, ultra-smooth scrolling
+      const diff = scrollRef.current - smoothProgress.current;
+      const force = diff * stiffness;
+      velocity += force;
+      velocity *= damping;
+      
+      smoothProgress.current += velocity;
+      
+      // Clamp value strictly inside [0, 1] bounds
+      smoothProgress.current = Math.max(0.0, Math.min(1.0, smoothProgress.current));
       
       updateHUD(smoothProgress.current);
       

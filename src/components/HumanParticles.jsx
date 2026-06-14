@@ -96,46 +96,38 @@ void main() {
   vNormBgDist = aRandom.w;
   
   // Scene 1 & 2 Morph: Void -> Spiral Assembly -> Formed
-  // uProgress = 0.0 -> 0.20: The Void (floating galaxy starfield)
-  // uProgress = 0.20 -> 0.45: Particle Convergence (spiraling towards target)
-  
   float morphStart = 0.20 + aDelay * 0.12; 
   float morphEnd = 0.45;
   float morphProgress = smoothstep(morphStart, morphEnd, uProgress);
   
   vec3 currentPos = mix(pos, aTarget, morphProgress);
   
-  // Spiral vortex assembly during Convergence stage
-  if (uProgress >= 0.20 && uProgress < 0.45) {
-    float spiralAngle = (1.0 - morphProgress) * 4.0 * 3.14159265; 
-    float cosS = cos(spiralAngle);
-    float sinS = sin(spiralAngle);
-    
-    vec3 swirled = currentPos;
-    swirled.x = currentPos.x * cosS - currentPos.z * sinS;
-    swirled.z = currentPos.x * sinS + currentPos.z * cosS;
-    
-    currentPos = mix(swirled, currentPos, morphProgress * morphProgress);
-  }
+  // Continuous swirl assembly (completely conditional-free to avoid layout switches/snaps)
+  float swirlFactor = (1.0 - morphProgress) * morphProgress * 4.0;
+  float spiralAngle = swirlFactor * 4.0 * 3.14159265; 
+  float cosS = cos(spiralAngle);
+  float sinS = sin(spiralAngle);
   
-  // Floating drift orbit in Cosmic Chaos (Stage 1)
-  if (uProgress < 0.45) {
-    float chaosFactor = 1.0 - morphProgress;
-    
-    float chaosAngle = uTime * 0.04 + aRandom.x * 2.0;
-    float cosC = cos(chaosAngle);
-    float sinC = sin(chaosAngle);
-    vec3 rotatedChaos = currentPos;
-    rotatedChaos.x = currentPos.x * cosC - currentPos.z * sinC;
-    rotatedChaos.z = currentPos.x * sinC + currentPos.z * cosC;
-    
-    vec3 noiseVal = vec3(
-      snoise(pos * 0.008 + vec3(uTime * 0.08)),
-      snoise(pos * 0.008 + vec3(uTime * 0.08 + 50.0)),
-      snoise(pos * 0.008 + vec3(uTime * 0.08 + 100.0))
-    );
-    currentPos = mix(rotatedChaos + noiseVal * 12.0, currentPos, morphProgress);
-  }
+  vec3 swirled = currentPos;
+  swirled.x = currentPos.x * cosS - currentPos.z * sinS;
+  swirled.z = currentPos.x * sinS + currentPos.z * cosS;
+  
+  currentPos = mix(currentPos, swirled, smoothstep(0.0, 0.5, swirlFactor));
+  
+  // Continuous floating drift orbit in Cosmic Chaos (no hard conditional)
+  float chaosAngle = uTime * 0.04 + aRandom.x * 2.0;
+  float cosC = cos(chaosAngle);
+  float sinC = sin(chaosAngle);
+  vec3 rotatedChaos = currentPos;
+  rotatedChaos.x = currentPos.x * cosC - currentPos.z * sinC;
+  rotatedChaos.z = currentPos.x * sinC + currentPos.z * cosC;
+  
+  vec3 noiseVal = vec3(
+    snoise(pos * 0.008 + vec3(uTime * 0.08)),
+    snoise(pos * 0.008 + vec3(uTime * 0.08 + 50.0)),
+    snoise(pos * 0.008 + vec3(uTime * 0.08 + 100.0))
+  );
+  currentPos = mix(rotatedChaos + noiseVal * 12.0, currentPos, morphProgress);
   
   // Stationary formed entity (no breathing displacement to keep shape perfectly static)
   vec3 targetWithBreathe = aTarget;
@@ -150,65 +142,60 @@ void main() {
   vWave = pow(wave, 4.5); // sharp wave pulse
 
   // Scene 4: Consciousness (60% -> 80% scroll progress)
-  // Outer boundary particles (aRandom.y < 0.18) peel off and orbit the body, drifting upwards
-  vec3 targetWithOrbit = finalHumanPos;
-  if (uProgress > 0.60 && aRandom.y < 0.18) {
-    float orbitProgress = smoothstep(0.60, 0.80, uProgress);
-    
-    // Rotational orbit around the stationary human
-    float orbitAngle = uTime * 1.3 + aRandom.x * 6.28;
-    float r = length(aTarget.xz) + 2.0 + orbitProgress * 16.0;
-    float rise = orbitProgress * 28.0;
-    
-    vec3 orbitPos = targetWithBreathe;
-    orbitPos.x = sin(orbitAngle) * r;
-    orbitPos.z = cos(orbitAngle) * r;
-    orbitPos.y += rise + sin(uTime * 2.0 + aRandom.x * 12.0) * 4.0;
-    
-    targetWithOrbit = mix(finalHumanPos, orbitPos, orbitProgress);
-  }
+  // Outer boundary particles (aRandom.y < 0.18) peel off and orbit the body, drifting upwards (branchless)
+  float orbitWeight = step(aRandom.y, 0.18); 
+  float orbitProgress = smoothstep(0.60, 0.80, uProgress) * orbitWeight;
+  
+  float orbitAngle = uTime * 1.3 + aRandom.x * 6.28;
+  float r = length(aTarget.xz) + 2.0 + orbitProgress * 16.0;
+  float rise = orbitProgress * 28.0;
+  
+  vec3 orbitPos = targetWithBreathe;
+  orbitPos.x = sin(orbitAngle) * r;
+  orbitPos.z = cos(orbitAngle) * r;
+  orbitPos.y += rise + sin(uTime * 2.0 + aRandom.x * 12.0) * 4.0;
+  
+  vec3 targetWithOrbit = mix(finalHumanPos, orbitPos, orbitProgress);
   
   // Scene 5: Dissolution (80% -> 100% scroll progress)
-  // Particles gently separate and drift back to their starting sphere positions
-  vec3 finalPos = targetWithOrbit;
+  // Particles gently separate and drift back to their starting sphere positions (branchless)
+  float tDissolve = clamp((uProgress - 0.80) / 0.20, 0.0, 1.0);
   
-  if (uProgress > 0.80) {
-    float t = (uProgress - 0.80) / 0.20; // 0.0 -> 1.0
-    float tSmooth = smoothstep(0.0, 1.0, t);
-    
-    // Smooth transition from human target to the starting sphere coordinates
-    vec3 basePos = mix(targetWithOrbit, pos, tSmooth);
-    
-    // Add a gentle, slow drifting noise to simulate floating back
-    vec3 noiseInput = targetWithOrbit * 0.05 + vec3(0.0, uTime * 0.08, 0.0);
-    vec3 drift = vec3(
-      snoise(noiseInput),
-      snoise(noiseInput + vec3(20.0, 40.0, 60.0)),
-      snoise(noiseInput + vec3(60.0, 20.0, 40.0))
-    );
-    
-    // Drift is active in the middle of the transition, fading to 0 at t=0 and t=1
-    float driftAmp = sin(t * 3.14159265) * 6.0; 
-    
-    finalPos = basePos + drift * driftAmp;
-  }
+  // Quintic ease-in-out for ultra-smooth luxury drift transition (zero acceleration snaps)
+  float tSmooth = tDissolve * tDissolve * tDissolve * (tDissolve * (tDissolve * 6.0 - 15.0) + 10.0);
+  
+  // Smooth transition from human target to the starting sphere coordinates
+  vec3 basePos = mix(targetWithOrbit, pos, tSmooth);
+  
+  // Add a gentle, slow drifting noise to simulate floating back
+  vec3 noiseInput = targetWithOrbit * 0.05 + vec3(0.0, uTime * 0.08, 0.0);
+  vec3 drift = vec3(
+    snoise(noiseInput),
+    snoise(noiseInput + vec3(20.0, 40.0, 60.0)),
+    snoise(noiseInput + vec3(60.0, 20.0, 40.0))
+  );
+  
+  // Drift is active in the middle of the transition, fading to 0 at t=0 and t=1
+  float driftAmp = sin(tDissolve * 3.14159265) * 6.0; 
+  
+  vec3 finalPos = basePos + drift * driftAmp;
   
   // Render projection
   vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
   gl_Position = projectionMatrix * mvPosition;
   
   // 8K Crispness Edge Scaling:
-  // Edge particles are slightly larger to keep a solid outline, transitioning smoothly
-  float edgeScale = smoothstep(0.02, 0.30, aRandom.w);
-  float baseSize = 4.2 * (0.40 + 0.60 * edgeScale);
+  // Edge particles are sized to blend smoothly into the core, avoiding gaps
+  float edgeScale = smoothstep(0.01, 0.25, aRandom.w);
+  float baseSize = 4.2 * (0.65 + 0.35 * edgeScale);
   
   float stageSizeFactor = 1.0;
   
   if (uProgress > 0.60 && uProgress <= 0.80) {
     stageSizeFactor = 1.0 + smoothstep(0.60, 0.80, uProgress) * 0.3;
   } else if (uProgress > 0.80) {
-    // Stage 5: Gently return to original sizes
-    stageSizeFactor = mix(1.3, 1.0, smoothstep(0.80, 1.0, uProgress));
+    // Stage 5: Gently return to original sizes using the same quintic easing
+    stageSizeFactor = mix(1.3, 1.0, tSmooth);
   }
   
   gl_PointSize = baseSize * stageSizeFactor * (320.0 / -mvPosition.z);
@@ -245,9 +232,11 @@ void main() {
   // Mix sharp edge contour dots with soft volumetric inner glow to ensure razor-sharp silhouette
   float edgeFactor = smoothstep(0.0, 0.25, vNormBgDist);
   float circleGlow = 0.08 / (dist + 0.045);
-  float sharpGlow = step(dist, 0.47) * 1.25;
+  
+  // High-performance smooth anti-aliased edge circle (soft edge transition from 0.48 to 0.43)
+  float sharpGlow = smoothstep(0.48, 0.43, dist) * 1.2;
   float glow = mix(sharpGlow, circleGlow, edgeFactor);
-  glow = clamp(glow, 0.0, 1.25);
+  glow = clamp(glow, 0.0, 1.2);
   
   // RED AND BLUE ENERGY PALETTE
   vec3 colorRed = vec3(0.72, 0.04, 0.08); 
@@ -383,7 +372,7 @@ export function HumanParticles({ scrollProgress, onLoaded }) {
           const b = pixels128[idx + 2];
           const a = pixels128[idx + 3];
           
-          const isTransparent = a < 200; // stricter threshold to strip out blurry fuzzy antialiased edges
+          const isTransparent = a < 125; // moderate threshold for smooth antialiased edges without fuzziness
           const isWhite = r > 180 && g > 180 && b > 180;
           const isSilhouette = !isTransparent && !isWhite && (r < 120 && g < 120 && b < 120);
           
@@ -417,7 +406,7 @@ export function HumanParticles({ scrollProgress, onLoaded }) {
           const b = pixels512[idx + 2];
           const a = pixels512[idx + 3];
           
-          const isTransparent = a < 200; // stricter threshold to strip out blurry fuzzy antialiased edges
+          const isTransparent = a < 125; // moderate threshold for smooth antialiased edges without fuzziness
           const isWhite = r > 180 && g > 180 && b > 180;
           const isSilhouette = !isTransparent && !isWhite && (r < 120 && g < 120 && b < 120);
           
