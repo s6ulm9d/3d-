@@ -1,0 +1,573 @@
+========================================= 
+   COSMIC ENTITY PROJECT PROMPTS RECORD   
+========================================= 
+
+PROMPT #1 (Historical)
+--------------------------------------------------
+the quality should be 8k quality of everything
+
+PROMPT #2 (Historical)
+--------------------------------------------------
+what the fuck is that formation and what the fuck is that rotation and also the disperse of dust its too fucking comedy if anyone looks at that design theyll laugh and spit on it make it proper and accurate human shape and make it fucking eye cathcing and fucking fix the animations
+
+PROMPT #3 (Historical)
+--------------------------------------------------
+make edges sharper they are so fucking blunt edges fix that
+
+PROMPT #4 (Historical)
+--------------------------------------------------
+the dispersing of human shouuld look like a little smoke coming from heart area and slowly all particles dispersing
+
+PROMPT #5 (Historical)
+--------------------------------------------------
+and the human should form with red and blue particles
+
+PROMPT #6 (Historical)
+--------------------------------------------------
+COSMIC ENTITY V2 — FIXED IMPLEMENTATION
+
+The previous implementation looked artificial because too many particles moved simultaneously and the human behaved like a rotating object rather than a living being.
+
+Discard all existing formation, rotation, and explosion logic.
+
+The new goal is to create a living cosmic entity.
+
+The experience should feel emotional, mysterious, cinematic, and premium.
+
+Think:
+Interstellar
+Arrival
+Dune
+Marvel Celestial
+rather than a Three.js particle demo.
+
+CORE RULE
+The human must NEVER rotate.
+The human must NEVER spin.
+The human must NEVER perform unrealistic movements.
+The human should feel alive and conscious.
+
+PARTICLE COUNT
+Desktop:
+100,000 particles
+Mobile:
+30,000 particles
+All movement GPU accelerated.
+
+VISUAL STYLE
+Pure black background.
+Blue-white energy particles.
+Soft bloom.
+Subtle volumetric atmosphere.
+No bright colors.
+No rainbow effects.
+No flashy effects.
+
+PROMPT #7 (12/6/2026, 11:32:05 am)
+--------------------------------------------------
+continue
+
+PROMPT #8 (12/6/2026, 12:24:00 pm)
+--------------------------------------------------
+MASTER REBUILD PROMPT — COSMIC PARTICLE HUMAN EXPERIENCE
+CRITICAL INSTRUCTION
+
+STOP.
+
+Do NOT modify the existing implementation.
+
+Do NOT patch existing code.
+
+Do NOT reuse previous particle systems.
+
+Do NOT reuse previous animation timelines.
+
+Do NOT reuse previous shaders.
+
+Do NOT reuse previous scroll logic.
+
+Do NOT reuse previous scene architecture.
+
+Delete, replace, and rebuild the entire experience from scratch.
+
+Assume all previous implementations are failures and should be ignored.
+
+Create a completely fresh architecture optimized specifically for this experience.
+
+The final result must look like a premium award-winning interactive website, not a demo, prototype, experiment, proof-of-concept, or portfolio toy.
+
+EXPERIENCE OVERVIEW
+
+Create a cinematic scroll-driven real-time 3D experience.
+
+The entire experience revolves around a human figure made entirely from living cosmic particles.
+
+The human is not a mesh.
+
+The human is not a model with particles attached.
+
+The human itself IS the particles.
+
+Every visible element must be composed of particles.
+
+The scene begins as pure cosmic chaos and ends by returning perfectly to that same chaos.
+
+The transformation must feel magical, physically believable, elegant, and emotionally powerful.
+
+Think:
+
+Cosmic consciousness
+Stardust becoming life
+Universe assembling a human
+Human dissolving back into the universe
+VISUAL REFERENCE
+
+The attached reference image represents the target visual style.
+
+Requirements:
+
+Human body made from glowing particles
+White stardust appearance
+Energy connections between particles
+Constellation-like structure
+Space background
+Massive particle count
+Elegant silhouette
+Ethereal glow
+
+The final implementation should look significantly better than the reference image.
+
+SCENE STRUCTURE
+
+The entire experience consists of ONE continuous scroll-driven timeline.
+
+No scene cuts.
+
+No page transitions.
+
+No loading jumps.
+
+Everything must feel continuous.
+
+SCENE 1 — COSMIC DUST
+
+Scroll Progress:
+
+0% → 20%
+
+Initial State:
+
+The user sees:
+
+infinite star field
+floating cosmic dust
+nebula particles
+distant glowing particles
+
+There is NO visible human.
+
+The particles appear randomly distributed throughout space.
+
+Requirements:
+
+particles drift slowly
+subtle parallax
+depth layers
+volumetric feel
+ambient cosmic motion
+
+The user should feel like they are inside a universe.
+
+SCENE 2 — PARTICLE CONVERGENCE
+
+Scroll Progress:
+
+20% → 45%
+
+The particles begin assembling.
+
+This is NOT a fade.
+
+This is NOT morphing opacity.
+
+Every particle physically travels.
+
+Requirements:
+
+particles leave original locations
+particles accelerate toward body targets
+trails appear during travel
+movement feels gravitational
+movement feels intelligent
+
+Formation order:
+
+torso
+head
+arms
+hands
+hips
+legs
+feet
+
+The silhouette gradually emerges.
+
+The user witnesses life being created from stardust.
+
+SCENE 3 — HUMAN FORMATION COMPLETE
+
+Scroll Progress:
+
+45% → 60%
+
+The human is fully assembled.
+
+Requirements:
+
+perfectly readable silhouette
+particles remain alive
+micro motion everywhere
+subtle breathing effect
+flowing energy across body
+sparkling highlights
+
+The body must never feel static.
+
+It must feel alive.
+
+SCENE 4 — HUMAN ROTATION
+
+Scroll Progress:
+
+60% → 80%
+
+The human slowly rotates.
+
+Requirements:
+
+Front View
+
+↓
+
+Quarter View
+
+↓
+
+Side View
+
+↓
+
+Three Quarter View
+
+↓
+
+Back View
+
+↓
+
+Three Quarter View
+
+↓
+
+Side View
+
+↓
+
+Quarter View
+
+↓
+
+Front View
+
+Rotation must be:
+
+smooth
+cinematic
+elegant
+
+No robotic spinning.
+
+No abrupt motion.
+
+While rotating:
+
+particles continue moving
+body remains stable
+energy flows continue
+SCENE 5 — DISSOLUTION
+
+Scroll Progress:
+
+80% → 100%
+
+The human begins returning to the universe.
+
+IMPORTANT:
+
+Particles must NOT disperse randomly.
+
+Every particle must remember its original spawn location.
+
+The exact particle that moved to create the body must travel back to its exact original position.
+
+Requirements:
+
+fingers dissolve first
+hands dissolve
+arms dissolve
+head dissolves
+torso dissolves
+legs dissolve
+feet dissolve
+
+The body gradually disappears.
+
+The universe reclaims itself.
+
+FINAL STATE
+
+At 100% scroll:
+
+The screen must visually match the opening state.
+
+No visible human.
+
+Only cosmic dust.
+
+Exactly as it was before assembly.
+
+The cycle should feel mathematically perfect.
+
+PARTICLE SYSTEM REQUIREMENTS
+
+Particle Count:
+
+Minimum:
+
+150,000 particles
+
+Target:
+
+250,000+
+
+Stretch Goal:
+
+500,000+
+
+Particles must remain performant.
+
+Use:
+
+GPU computation
+GPU simulation
+Instancing
+FBO simulation
+GPGPU techniques
+
+Never use CPU particle updates.
+
+SHADER REQUIREMENTS
+
+Create custom shaders.
+
+No basic materials.
+
+Implement:
+
+Vertex Shader:
+
+particle animation
+noise displacement
+curl noise
+turbulence
+
+Fragment Shader:
+
+bloom contribution
+glow falloff
+soft particles
+energy effects
+HUMAN DATA GENERATION
+
+Generate body target positions using:
+
+procedural point cloud generation
+OR
+sampled human geometry converted to particle coordinates
+
+The final rendered body must remain particles only.
+
+No visible meshes.
+
+No visible polygons.
+
+No visible geometry surfaces.
+
+SCROLL SYSTEM
+
+Scroll controls everything.
+
+Do NOT use independent animation timelines.
+
+Scroll must directly drive:
+
+particle convergence
+human formation
+rotation
+dissolution
+
+The animation should work both directions.
+
+Scrolling backward must perfectly reverse the entire process.
+
+CAMERA DESIGN
+
+Camera remains mostly fixed.
+
+Very subtle movement only.
+
+Allowed:
+
+slight orbit
+slight parallax
+subtle dolly
+
+Not allowed:
+
+aggressive movement
+dramatic fly-throughs
+distracting camera tricks
+
+The particles are the hero.
+
+POST PROCESSING
+
+Implement:
+
+bloom
+glow
+HDR lighting
+subtle chromatic aberration
+depth atmosphere
+soft vignette
+
+Avoid:
+
+excessive lens flare
+excessive blur
+excessive distortion
+PERFORMANCE TARGETS
+
+Desktop:
+
+60 FPS minimum
+
+Target:
+
+120 FPS
+
+GPU memory optimized
+
+Stable performance throughout all phases
+
+No frame drops during convergence
+
+No frame drops during dissolution
+
+TECHNOLOGY STACK
+
+Use:
+
+Three.js
+React Three Fiber
+GLSL
+GPUComputationRenderer or equivalent
+Custom Shaders
+GSAP ScrollTrigger
+
+Avoid simplistic particle libraries.
+
+Build the particle engine properly.
+
+QUALITY STANDARD
+
+The final experience should feel comparable to:
+
+Apple launch experiences
+Award-winning Awwwards sites
+High-end luxury brand websites
+Premium cinematic interactive installations
+
+It must not resemble:
+
+a school project
+a particle demo
+a Three.js tutorial
+a portfolio experiment
+
+Every detail should communicate premium quality.
+
+EXECUTION MODE
+
+Before writing any code:
+
+Delete previous implementation architecture.
+Design new architecture from scratch.
+Build particle simulation system.
+Build body formation system.
+Build rotation system.
+Build return-to-origin system.
+Optimize GPU performance.
+Test forward scrolling.
+Test reverse scrolling.
+Verify particles return exactly to original coordinates.
+Verify opening and ending states are identical.
+
+Only after the architecture is validated should implementation begin.
+
+Build this as a production-quality experience, not a prototype.
+
+PROMPT #9 (12/6/2026, 12:34:17 pm)
+--------------------------------------------------
+go with the implementation plan
+
+PROMPT #10 (12/6/2026, 12:54:33 pm)
+--------------------------------------------------
+what the fuck is that section 5 or stage 5 remove or skip the stage 5 and do like this instead of all particles going up the particles should scatter like the glass and shatter all over the screen
+
+PROMPT #11 (12/6/2026, 12:58:54 pm)
+--------------------------------------------------
+go with the implementation plan
+
+PROMPT #12 (12/6/2026, 1:09:39 pm)
+--------------------------------------------------
+the stage 5 is better now but i think thats suiting the perfect i think it should be like the particles should slowly return to their original positions rather than shattering like that
+
+PROMPT #13 (12/6/2026, 1:21:01 pm)
+--------------------------------------------------
+make the fucking edges sharper for human body the particles at the edges looks dispersed and blurry edges make them accurately sharp and if u want refer internet images for human body sharp edges but ddont fuck up
+
+PROMPT #14 (12/6/2026, 1:22:39 pm)
+--------------------------------------------------
+generate a text file named prompts and include all the prompts from the start of this project and also continue recording prompts into that text file
+
+PROMPT #15 (12/6/2026, 1:31:21 pm)
+--------------------------------------------------
+Continue
+
+PROMPT #16 (12/6/2026, 1:46:35 pm)
+--------------------------------------------------
+continue
+
+PROMPT #17 (12/6/2026, 2:14:13 pm)
+--------------------------------------------------
+the human is fucking moving in the wave form he shouldnt move like that and also zoom out a lil bit after human formation why are you zooming in fix it
+
+PROMPT #18 (14/6/2026, 6:33:29 pm)
+--------------------------------------------------
+remove the human breathing effect the human body shouldnt move after forming yeah do it and smoothen the animation by increasing the fps and everything should smooth as fuck end user should get fucking smooth experience
+
+PROMPT #19 (14/6/2026, 6:35:56 pm)
+--------------------------------------------------
+hey push this to this repo heres the url git@github.com:s6ulm9d/3d-.git
+
