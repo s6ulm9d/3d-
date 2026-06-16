@@ -579,3 +579,7 @@ PROMPT #21 (14/6/2026, 6:58:19 pm)
 --------------------------------------------------
 and are u storing all the prompts adnd for every sinngle change push the changes tp github
 
+PROMPT #22 (16/6/2026, 2:09:19 pm)
+--------------------------------------------------
+continue
+
